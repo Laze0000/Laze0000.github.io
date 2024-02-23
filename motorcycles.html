@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Proektna zadacha 1</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <style>
+            .block{
+                width:15%;
+            }
+            .container{
+                padding-bottom: 3%;
+                margin-bottom: 3%;
+            }
+            .block1{
+                background-image: url('yamaha.jpg');
+            }
+            
+        </style>
+        <script type="text/javascript" language="JavaScript">
+window.onload = function() {
+
+
+}
+            document.addEventListener('DOMContentLoaded', function() {
+            const likeButton = document.getElementById('like');
+            const likeCountElement = document.getElementById('likes');
+            let likeCount = 0;
+
+            likeButton.addEventListener('click', () => {
+            likeCount++;
+            likeCountElement.innerText = likeCount;});
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.post-comment').forEach(function(button) {
+            button.addEventListener('click', function() {
+            var commentSection = button.closest('.comment-section');
+            var commentInput = commentSection.querySelector('.input');
+            var newComment = commentInput.value;
+            if (newComment) {
+                var li = document.createElement('li');
+                li.textContent = newComment;
+                commentSection.querySelector('.comments').appendChild(li);
+                commentInput.value = '';
+            }
+        });
+    });
+});
+        </script>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function(){
+    $('#brand').change(function(){
+        var selectedBrand = $(this).val();
+        $('#model').empty();
+
+        if(selectedBrand === 'Yamaha'){
+            $('#model').append($('<option>', {
+                text: 'R1'
+            }));
+            $('#model').append($('<option>', {
+                text: 'MT-09'
+            }));
+            $('#model').append($('<option>', {
+                text: 'Tenere-09'
+            }));
+        }
+        else if(selectedBrand === 'Kawasaki'){
+            $('#model').append($('<option>', {
+                text: 'Z900'
+            }));
+            $('#model').append($('<option>', {
+                text: 'Ninja 400'
+            }));
+        }
+        else if(selectedBrand === 'Honda'){
+            $('#model').append($('<option>', {
+                text: 'CB500F'
+            }));
+            $('#model').append($('<option>', {
+                text: 'Goldwing'
+            }));
+        }
+
+        updateImage($('#model').val());
+    });
+
+    $('#model').change(function(){
+        updateImage($(this).val());
+    });
+
+    function updateImage(modelName) {
+        var slika = $("#slika");
+        var imageUrls = {
+            "R1": "r1.jpg",
+            "MT-09": "mt09.jpg",
+            "Tenere-09": "tenere.jpg",
+            "Z900": "z900.avif",
+            "Ninja 400": "ninja400.jpg",
+            "CB500F": "cb500.jpg",
+            "Goldwing": "goldwing.jpg"
+        };
+        slika.attr("src", imageUrls[modelName] || "");
+    }
+
+});
+
+        </script>
+            <div class="header">
+        <h1>Motorcycle shop</h1>
+        <p>Buy brand new motorcylces, gear and parts all online!</p>
+        <a href="homepage.html"><button class="back" type="submit">Back to homepage</button></a>
+        </div>
+
+        <div class="top">
+        <h1>Order your new motorcycle here!</h1>
+        <p>This site links to reviews of the motocycles we offer for sale.<br>
+            Though the form below, you can order the motorcycle to be delivered from the factory!<br>
+            Choose from one of the three brands to see information about the aviable motorcycles.
+        </p>
+        </div>
+
+        <div class="container">
+            <a href="https://global.yamaha-motor.com/business/mc/">
+            <div class="block" id="block1" style="background-image: url('yamaha.jpg'); background-size: cover;">
+            <h1 style="color: blue">Yamaha</h1>
+            </div>
+            </a>
+            
+            <a href="https://www.kawasaki.com/en-us/">
+            <div class="block" id="block2" style="background-image: url('kawasaki.jpg'); background-size: cover;">
+            <h1 style="color:green">Kawasaki</h1>
+            </div>
+            </a>
+    
+            <a href="https://powersports.honda.com/">
+            <div class="block" id="block3" style="background-image: url('honda.png'); background-size: cover;">
+            <h1 style="color: red;">Honda</h1>
+            </div>
+            </a>
+        </div>
+
+
+
+        <table width="50%" border="1" align="center" style="background-color:white">
+            <tr>
+                <th align="center" colspan="2">Order your motorcycle here!</th>
+            </tr>
+            
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                <label> <input name = "name" type="text" style="width: 70%"> </label>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone number:</td>
+            <td>
+                <label> <input name = "name" type="number" style="width: 70%"> </label>
+            </td>
+        </tr>
+            <tr>
+                <td>Brand:</td>
+                <td><select name="brand" id="brand" onchange="update()" onload="update()">
+                    <option>Yamaha</option>
+                    <option>Kawasaki</option>
+                    <option>Honda</option></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Model:</td>
+                <td><select name="model" id="model"></select></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" aling="center">
+                    <input type="submit" value="Send my order" align="center">
+                </td>
+            </tr>
+
+        </table>
+        <div class="container">
+        <img id="slika" src="" style="display:block; margin-left: auto; margin-right: auto; margin-top: 3%; width: 50%; height: 50%; border: 5px solid rgb(28, 42, 42);">
+            <button id="like">Like</button>
+            <span id="likes">0</span> likes<br>
+            <div class="comment-section">
+                <h3>Comments:</h3>
+                <ul class="comments"></ul>
+                <input type="text" class="input" placeholder="Type your comment here">
+                <button class="post-comment">Post Comment</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <a href="mailto: lazar.vanchov@gmail.com">lazar.vanchov@gmail.com</a>
+            </p>
+        </div>
+    </body>
+</html>
